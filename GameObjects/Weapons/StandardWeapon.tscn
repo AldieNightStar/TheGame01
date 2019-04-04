@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/001.png" type="Texture" id=1]
+
+[node name="wpn" type="Node2D"]
+
+[node name="left_hand" type="Sprite" parent="."]
+position = Vector2( 10.8546, 68.9228 )
+rotation = -1.0472
+scale = Vector2( 0.795525, 0.712312 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 1151, 776, 79, 76 )
+
+[node name="gun" type="Sprite" parent="."]
+position = Vector2( 11.9485, 14.9805 )
+scale = Vector2( 0.658806, 0.608232 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 143, 1061, 529, 221 )
+
+[node name="right_hand" type="Sprite" parent="."]
+position = Vector2( -60.4526, 43.8508 )
+rotation = -1.83259
+scale = Vector2( 0.795525, 0.712312 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 1151, 776, 79, 76 )
+

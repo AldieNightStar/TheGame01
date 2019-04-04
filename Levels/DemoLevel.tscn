@@ -5,5 +5,6 @@
 [node name="DemoLevel" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 513.582, 134.032 )
+position = Vector2( 80.4199, 339.527 )
+scale = Vector2( 0.478256, 0.516905 )
 
