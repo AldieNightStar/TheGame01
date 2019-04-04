@@ -1,0 +1,153 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/001.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends KinematicBody2D
+
+export var speed = 0
+export var move_speed = 1
+var vec_positive : Vector2
+var vec_negative : Vector2
+var vec_null     : Vector2
+var vec_current  : Vector2
+export var right_direction : bool
+
+func _ready():
+	$g/ani.play(\"stay\")
+	vec_positive = Vector2(move_speed, 0)
+	vec_negative = Vector2(-move_speed, 0)
+	vec_null     = Vector2(0, 0)
+	vec_current  = vec_null
+	print(vec_positive)
+
+func _physics_process(delta):
+	move_and_slide((vec_positive * speed) * delta)
+	
+
+func start_move():
+	pass
+
+func stop_move():
+	self.speed = 0
+
+func jump():
+	pass
+
+func look_to(x, y):
+	pass
+	
+func shoot():
+	pass"
+
+[sub_resource type="Animation" id=2]
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("body:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 5.01337, 226.477 ), Vector2( 5.71173, 216.002 ), Vector2( 5.01337, 226.477 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("head:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 34.0093, -6.31579 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("head:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.5, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 8.0, 0.0 ]
+}
+
+[sub_resource type="RectangleShape2D" id=3]
+
+[node name="Player" type="KinematicBody2D"]
+position = Vector2( -6.47534, -176.995 )
+script = SubResource( 1 )
+
+[node name="g" type="Node2D" parent="."]
+editor/display_folded = true
+
+[node name="head" type="Sprite" parent="g"]
+scale = Vector2( 0.655525, 0.624721 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 149, 268, 423, 464 )
+
+[node name="body" type="Sprite" parent="g"]
+position = Vector2( 5.01337, 226.477 )
+scale = Vector2( 0.655525, 0.624721 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 1272, 441, 201, 253 )
+
+[node name="left_foot" type="Sprite" parent="g"]
+position = Vector2( 30.6664, 393.803 )
+scale = Vector2( 0.655525, 0.624721 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 1239, 1015, 134, 207 )
+
+[node name="right_foot" type="Sprite" parent="g"]
+position = Vector2( -12.8655, 419.65 )
+scale = Vector2( 0.655525, 0.624721 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 1408, 1009, 134, 207 )
+
+[node name="wpn" type="Node2D" parent="g"]
+position = Vector2( 168.336, 147.018 )
+
+[node name="left_hand" type="Sprite" parent="g/wpn"]
+position = Vector2( 10.8546, 68.9228 )
+rotation = -1.0472
+scale = Vector2( 0.795525, 0.712312 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 1151, 776, 79, 76 )
+
+[node name="gun" type="Sprite" parent="g/wpn"]
+position = Vector2( 9.89801, 14.9805 )
+scale = Vector2( 0.658806, 0.608232 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 143, 1061, 529, 221 )
+
+[node name="right_hand" type="Sprite" parent="g/wpn"]
+position = Vector2( -60.4526, 43.8508 )
+rotation = -1.83259
+scale = Vector2( 0.795525, 0.712312 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 1151, 776, 79, 76 )
+
+[node name="ani" type="AnimationPlayer" parent="g"]
+playback_process_mode = 0
+anims/stay = SubResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 8.63391, 179.153 )
+scale = Vector2( 10.3322, 29.542 )
+shape = SubResource( 3 )
+
