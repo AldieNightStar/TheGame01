@@ -6,17 +6,26 @@
 script/source = "extends Node2D
 
 func _ready():
+	$ani.connect(\"animation_finished\", self, \"ani_done\")
 	$ani.play(\"stay\")
 
 func shoot():
-	pass"
+	$ani.play(\"shoot\")
+
+func _physics_process(delta):
+	if Input.is_action_just_pressed(\"ui_accept\"):
+		shoot()
+
+func ani_done(a):
+	if (a != \"stay\"):
+		$ani.play(\"stay\")"
 
 [sub_resource type="Animation" id=3]
 resource_name = "shoot"
 length = 0.1
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("gun:position")
+tracks/0/path = NodePath("g/gun:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -28,7 +37,7 @@ tracks/0/keys = {
 "values": [ Vector2( 11.9485, 14.9805 ), Vector2( -0.269091, 0.319383 ), Vector2( 11.9485, 14.9805 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("gun:rotation_degrees")
+tracks/1/path = NodePath("g/gun:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -40,7 +49,7 @@ tracks/1/keys = {
 "values": [ 0.0, -15.0, 0.0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("right_hand:position")
+tracks/2/path = NodePath("g/right_hand:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -52,7 +61,7 @@ tracks/2/keys = {
 "values": [ Vector2( -60.4526, 43.8508 ), Vector2( -64.5251, 47.9233 ), Vector2( -60.4526, 43.8508 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("right_hand:rotation_degrees")
+tracks/3/path = NodePath("g/right_hand:rotation_degrees")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -64,7 +73,7 @@ tracks/3/keys = {
 "values": [ -105.0, -105.0, -105.0 ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("left_hand:position")
+tracks/4/path = NodePath("g/left_hand:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -76,7 +85,7 @@ tracks/4/keys = {
 "values": [ Vector2( 10.8546, 68.9228 ), Vector2( 16.5562, 48.5601 ), Vector2( 10.8546, 68.9228 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("left_hand:rotation_degrees")
+tracks/5/path = NodePath("g/left_hand:rotation_degrees")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -87,12 +96,24 @@ tracks/5/keys = {
 "update": 0,
 "values": [ -60.0001, -89.9999, -60.0001 ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("g:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -27.9334, 0.698334 ), Vector2( 0, 0 ) ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "stay"
 length = 0.2
 tracks/0/type = "value"
-tracks/0/path = NodePath("left_hand:position")
+tracks/0/path = NodePath("g/left_hand:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -104,7 +125,7 @@ tracks/0/keys = {
 "values": [ Vector2( 10.8546, 68.9228 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("left_hand:rotation_degrees")
+tracks/1/path = NodePath("g/left_hand:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -116,7 +137,7 @@ tracks/1/keys = {
 "values": [ -60.0001 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("right_hand:position")
+tracks/2/path = NodePath("g/right_hand:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -128,7 +149,7 @@ tracks/2/keys = {
 "values": [ Vector2( -60.4526, 43.8508 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("right_hand:rotation_degrees")
+tracks/3/path = NodePath("g/right_hand:rotation_degrees")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -140,7 +161,7 @@ tracks/3/keys = {
 "values": [ -105.0 ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("gun:position")
+tracks/4/path = NodePath("g/gun:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -152,7 +173,7 @@ tracks/4/keys = {
 "values": [ Vector2( 11.9485, 14.9805 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("gun:rotation_degrees")
+tracks/5/path = NodePath("g/gun:rotation_degrees")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -167,7 +188,9 @@ tracks/5/keys = {
 [node name="wpn" type="Node2D"]
 script = SubResource( 1 )
 
-[node name="left_hand" type="Sprite" parent="."]
+[node name="g" type="Node2D" parent="."]
+
+[node name="left_hand" type="Sprite" parent="g"]
 position = Vector2( 10.8546, 68.9228 )
 rotation = -1.0472
 scale = Vector2( 0.795525, 0.712312 )
@@ -175,14 +198,14 @@ texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 1151, 776, 79, 76 )
 
-[node name="gun" type="Sprite" parent="."]
+[node name="gun" type="Sprite" parent="g"]
 position = Vector2( 11.9485, 14.9805 )
 scale = Vector2( 0.658806, 0.608232 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 143, 1061, 529, 221 )
 
-[node name="right_hand" type="Sprite" parent="."]
+[node name="right_hand" type="Sprite" parent="g"]
 position = Vector2( -60.4526, 43.8508 )
 rotation = -1.83259
 scale = Vector2( 0.795525, 0.712312 )

@@ -16,7 +16,10 @@ func shoot(): # Стріляти
 	pass
 
 func aim(pos: Vector2): # Куди прицілюватись ** Example: Vector2(x, y)
-	$g/wpn.look_at(pos)"
+	$g/wpn.look_at(pos)
+
+func change_weapon(weapon: Node2D):
+	$g/wpn.replace_by(weapon)"
 
 [sub_resource type="Animation" id=2]
 length = 3.0
