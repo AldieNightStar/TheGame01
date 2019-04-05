@@ -12,7 +12,8 @@ func _ready():
 func shoot():
 	# Create bullet
 	var bullet = load(\"res://GameObjects/Weapons/StandardWeapon_bullet.tscn\").instance()
-	bullet.position = global_position
+	bullet.position = $g/gun/pusher.global_position
+	bullet.rotation = rotation
 	bullet.vec = Vector2(5, 0).rotated(rotation)
 	get_tree().get_root().get_node(\"DemoLevel\").add_child(bullet) # TODO
 	$ani.play(\"shoot\")
@@ -210,6 +211,9 @@ scale = Vector2( 0.658806, 0.608232 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 143, 1061, 529, 221 )
+
+[node name="pusher" type="Node2D" parent="g/gun"]
+position = Vector2( 275.6, -19.5183 )
 
 [node name="right_hand" type="Sprite" parent="g"]
 position = Vector2( -60.4526, 43.8508 )
