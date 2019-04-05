@@ -10,6 +10,11 @@ func _ready():
 	$ani.play(\"stay\")
 
 func shoot():
+	# Create bullet
+	var bullet = load(\"res://GameObjects/Weapons/StandardWeapon_bullet.tscn\").instance()
+	bullet.position = global_position
+	bullet.vec = Vector2(5, 0).rotated(rotation)
+	get_tree().get_root().get_node(\"DemoLevel\").add_child(bullet) # TODO
 	$ani.play(\"shoot\")
 
 func _physics_process(delta):
@@ -18,12 +23,14 @@ func _physics_process(delta):
 
 func ani_done(a):
 	if (a != \"stay\"):
-		$ani.play(\"stay\")"
+		$ani.play(\"stay\")
 
-[sub_resource type="Animation" id=3]
+# func look_at(Vector2)"
+
+[sub_resource type="Animation" id=2]
 resource_name = "shoot"
 length = 0.1
-step = 0.05
+step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("g/gun:position")
 tracks/0/interp = 1
@@ -109,8 +116,7 @@ tracks/6/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( -27.9334, 0.698334 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "stay"
+[sub_resource type="Animation" id=3]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("g/left_hand:position")
@@ -207,13 +213,13 @@ region_rect = Rect2( 143, 1061, 529, 221 )
 
 [node name="right_hand" type="Sprite" parent="g"]
 position = Vector2( -60.4526, 43.8508 )
-rotation = -1.83259
+rotation = -1.8326
 scale = Vector2( 0.795525, 0.712312 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 1151, 776, 79, 76 )
 
 [node name="ani" type="AnimationPlayer" parent="."]
-anims/shoot = SubResource( 3 )
-anims/stay = SubResource( 2 )
+anims/shoot = SubResource( 2 )
+anims/stay = SubResource( 3 )
 

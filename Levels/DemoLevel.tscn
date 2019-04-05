@@ -5,6 +5,18 @@
 [node name="DemoLevel" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 80.4199, 339.527 )
+position = Vector2( 78.3146, 341.197 )
 scale = Vector2( 0.478256, 0.516905 )
+
+[node name="txt" type="Node2D" parent="."]
+position = Vector2( 9.133, 37.467 )
+scale = Vector2( 4.02068, 7.61071 )
+
+[node name="lbl" type="Label" parent="txt"]
+margin_left = 107.595
+margin_top = 66.3485
+margin_right = 305.595
+margin_bottom = 80.3485
+rect_scale = Vector2( 0.716115, 0.434505 )
+text = "Press [space] to check Shoot! :)"
 
