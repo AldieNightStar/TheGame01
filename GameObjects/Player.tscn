@@ -11,9 +11,14 @@ func _ready():
 
 func _physics_process(delta):
 	aim(get_global_mouse_position()) # Тимчасово тут
+	if Input.is_action_just_pressed(\"ui_accept\"):
+		shoot()
 	
 func shoot(): # Стріляти
-	pass
+	$g/wpn.shoot()
+
+func reload(): # Перезагрузити зброю
+	$g/wpn.reload()
 
 func aim(pos: Vector2): # Куди прицілюватись ** Example: Vector2(x, y)
 	$g/wpn.look_at(pos)
@@ -46,7 +51,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 1.5, 3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 34.0093, -6.31579 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 10.6692, -6.49719 ), Vector2( 0, 0 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("head:rotation_degrees")
@@ -58,7 +63,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 1.5, 3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ 0.0, 8.0, 0.0 ]
+"values": [ 0.0, 6.0, 0.0 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("left_foot:position")
@@ -118,13 +123,15 @@ script = SubResource( 1 )
 [node name="g" type="Node2D" parent="."]
 
 [node name="head" type="Sprite" parent="g"]
+position = Vector2( 2.13394, -1.2995 )
+rotation = 0.020945
 scale = Vector2( 0.655525, 0.624721 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 149, 268, 423, 464 )
 
 [node name="body" type="Sprite" parent="g"]
-position = Vector2( 5.01337, 226.477 )
+position = Vector2( 5.15305, 224.382 )
 scale = Vector2( 0.655525, 0.624721 )
 texture = ExtResource( 1 )
 region_enabled = true

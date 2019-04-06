@@ -9,15 +9,27 @@ export var vec : Vector2
 
 func _ready():
 	$notifier.connect(\"screen_exited\", self, \"queue_free\")
+	add_to_group(\"bullet\") # Важливо щоб пуля була в группі 'bullet'
 
 func _physics_process(delta):
-	var c = move_and_collide(vec * (1000 * delta))
-	if c: queue_free()"
+	var c = move_and_collide(vec * (300 * delta) )
+	if c:
+		if c.collider.is_in_group(\"bullet\"):
+			self.add_collision_exception_with(c.collider)
+		else:
+			queue_free()
+
+func invertX():
+	vec.x *= -1
+
+func invertY():
+	vec.y *= -1"
 
 [sub_resource type="RectangleShape2D" id=2]
 
 [node name="defaultBullet" type="KinematicBody2D"]
 scale = Vector2( 1.81927, 1.8532 )
+collision/safe_margin = 0.001
 script = SubResource( 1 )
 
 [node name="spr" type="Sprite" parent="."]

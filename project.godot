@@ -17,14 +17,16 @@ _global_script_class_icons={
 
 config/name="Testing Game"
 run/main_scene="res://Levels/DemoLevel.tscn"
-run/low_processor_mode=true
-run/low_processor_mode_sleep_usec=2000
 config/icon="res://icon.png"
 
 [display]
 
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_width"
+
+[physics]
+
+common/physics_fps=120
 
 [rendering]
 

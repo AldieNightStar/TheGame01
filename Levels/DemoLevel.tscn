@@ -1,22 +1,21 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://GameObjects/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://GameObjects/Obstacles/MirrorWall.tscn" type="PackedScene" id=2]
 
-[node name="DemoLevel" type="Node2D"]
+[node name="Level" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 78.3146, 341.197 )
+position = Vector2( 113.919, 341.197 )
 scale = Vector2( 0.478256, 0.516905 )
 
-[node name="txt" type="Node2D" parent="."]
-position = Vector2( 9.133, 37.467 )
-scale = Vector2( 4.02068, 7.61071 )
+[node name="lvlObjects" type="Node2D" parent="."]
 
-[node name="lbl" type="Label" parent="txt"]
-margin_left = 107.595
-margin_top = 66.3485
-margin_right = 305.595
-margin_bottom = 80.3485
-rect_scale = Vector2( 0.716115, 0.434505 )
-text = "Press [space] to check Shoot! :)"
+[node name="mirrorWall6" parent="lvlObjects" instance=ExtResource( 2 )]
+position = Vector2( 772.851, 323.386 )
+scale = Vector2( 1.58579, 5.60111 )
+
+[node name="mirrorWall7" parent="lvlObjects" instance=ExtResource( 2 )]
+position = Vector2( 431.717, 111.456 )
+scale = Vector2( 4.29052, 2.04491 )
 

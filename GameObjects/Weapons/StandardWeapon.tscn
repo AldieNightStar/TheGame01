@@ -15,12 +15,11 @@ func shoot():
 	bullet.position = $g/gun/pusher.global_position
 	bullet.rotation = rotation
 	bullet.vec = Vector2(5, 0).rotated(rotation)
-	get_tree().get_root().get_node(\"DemoLevel\").add_child(bullet) # TODO
+	get_tree().get_root().get_node(\"Level\").add_child(bullet) # TODO
 	$ani.play(\"shoot\")
 
-func _physics_process(delta):
-	if Input.is_action_just_pressed(\"ui_accept\"):
-		shoot()
+func reload():
+	pass
 
 func ani_done(a):
 	if (a != \"stay\"):
@@ -206,6 +205,7 @@ region_enabled = true
 region_rect = Rect2( 1151, 776, 79, 76 )
 
 [node name="gun" type="Sprite" parent="g"]
+editor/display_folded = true
 position = Vector2( 11.9485, 14.9805 )
 scale = Vector2( 0.658806, 0.608232 )
 texture = ExtResource( 1 )
@@ -213,7 +213,7 @@ region_enabled = true
 region_rect = Rect2( 143, 1061, 529, 221 )
 
 [node name="pusher" type="Node2D" parent="g/gun"]
-position = Vector2( 275.6, -19.5183 )
+position = Vector2( 272.016, -21.2827 )
 
 [node name="right_hand" type="Sprite" parent="g"]
 position = Vector2( -60.4526, 43.8508 )
