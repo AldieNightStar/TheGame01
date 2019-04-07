@@ -12,10 +12,30 @@ scale = Vector2( 0.478256, 0.516905 )
 [node name="lvlObjects" type="Node2D" parent="."]
 
 [node name="mirrorWall6" parent="lvlObjects" instance=ExtResource( 2 )]
-position = Vector2( 772.851, 323.386 )
+position = Vector2( 773.851, 323.386 )
 scale = Vector2( 1.58579, 5.60111 )
 
+[node name="mirrorWall12" parent="lvlObjects" instance=ExtResource( 2 )]
+position = Vector2( 643.851, 580.385 )
+scale = Vector2( 12.6753, 2.28446 )
+
 [node name="mirrorWall7" parent="lvlObjects" instance=ExtResource( 2 )]
-position = Vector2( 431.717, 111.456 )
-scale = Vector2( 4.29052, 2.04491 )
+position = Vector2( 196.718, 146.456 )
+scale = Vector2( 4.62548, 0.718549 )
+
+[node name="mirrorWall10" parent="lvlObjects" instance=ExtResource( 2 )]
+position = Vector2( 995.716, 116.456 )
+scale = Vector2( 0.455369, 3.02167 )
+
+[node name="mirrorWall11" parent="lvlObjects" instance=ExtResource( 2 )]
+position = Vector2( 929.716, 237.456 )
+scale = Vector2( 3.08324, 0.675723 )
+
+[node name="mirrorWall9" parent="lvlObjects" instance=ExtResource( 2 )]
+position = Vector2( 31.7178, 88.456 )
+scale = Vector2( 0.797116, 2.40358 )
+
+[node name="mirrorWall8" parent="lvlObjects" instance=ExtResource( 2 )]
+position = Vector2( 502.717, 17.4562 )
+scale = Vector2( 15.4632, 0.582249 )
 

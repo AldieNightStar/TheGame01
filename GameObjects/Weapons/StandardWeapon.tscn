@@ -1,31 +1,125 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/001.png" type="Texture" id=1]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
+export var maxAmmo = 120
+var ammo = 10
+var reloadAmmo = 10
+
 func _ready():
 	$ani.connect(\"animation_finished\", self, \"ani_done\")
 	$ani.play(\"stay\")
 
 func shoot():
-	# Create bullet
-	var bullet = load(\"res://GameObjects/Weapons/StandardWeapon_bullet.tscn\").instance()
-	bullet.position = $g/gun/pusher.global_position
-	bullet.rotation = rotation
-	bullet.vec = Vector2(5, 0).rotated(rotation)
-	get_tree().get_root().get_node(\"Level\").add_child(bullet) # TODO
-	$ani.play(\"shoot\")
+	# Check for bullets
+	if ammo > 0:
+		# Create bullet
+		var bullet = load(\"res://GameObjects/Weapons/StandardWeapon_bullet.tscn\").instance()
+		bullet.position = $g/gun/pusher.global_position
+		bullet.vec = Vector2(10, 0).rotated(rotation)
+		get_tree().get_root().get_node(\"Level\").add_child(bullet) # TODO
+		$ani.play(\"shoot\")
+		ammo -= 1
+	elif maxAmmo > 0:
+		reload()
 
 func reload():
-	pass
+	$ani.play(\"reload\")
+
+func _reloadDone():
+	if maxAmmo > 0:
+		if (maxAmmo - reloadAmmo) > 0:
+			ammo = reloadAmmo
+			maxAmmo -= reloadAmmo
+		else:
+			ammo = maxAmmo
 
 func ani_done(a):
+	if (a == \"reload\"):
+		_reloadDone()
 	if (a != \"stay\"):
 		$ani.play(\"stay\")
 
 # func look_at(Vector2)"
+
+[sub_resource type="Animation" id=4]
+resource_name = "reload"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("g/gun:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 11.9485, 14.9805 ), Vector2( 90.9727, 44.2487 ), Vector2( 11.9485, 14.9805 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("g/gun:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 30.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("g/right_hand:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 1, 1.2, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -60.4526, 43.8508 ), Vector2( -8.60604, 26.2899 ), Vector2( 152.787, 62.248 ), Vector2( -31.1844, 2.5408 ), Vector2( -20.3133, 34.485 ), Vector2( -60.4526, 43.8508 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("g/right_hand:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 1, 1.2, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -105.0, -105.0, -74.9999, -96.0001, -100.5, -105.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("g/left_hand:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 10.8546, 68.9228 ), Vector2( 65.2099, 83.5569 ), Vector2( 10.8546, 68.9228 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("g/left_hand:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -60.0001, -60.0001, -60.0001 ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "shoot"
@@ -224,6 +318,7 @@ region_enabled = true
 region_rect = Rect2( 1151, 776, 79, 76 )
 
 [node name="ani" type="AnimationPlayer" parent="."]
+anims/reload = SubResource( 4 )
 anims/shoot = SubResource( 2 )
 anims/stay = SubResource( 3 )
 

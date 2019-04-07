@@ -19,12 +19,12 @@ Name: `Level`
 
 ## Weapons
 * Type: Node2D
+=== Variables ===
+ammo # Current ammo in clip
+maxAmmo # Remaining ammo for next reloadings
 === Functions ===
 * shoot()
 * reload()
-* get_ammo()
-* set_ammo(num)
-* add_ammo(num)
 * look_at(positionXY: Vector2) # Standard function
 
 ## Walls
