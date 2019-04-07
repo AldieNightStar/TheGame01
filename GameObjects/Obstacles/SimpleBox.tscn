@@ -9,6 +9,7 @@ script/source = "extends Area2D
 
 func _ready():
 	connect(\"body_entered\", self, \"_enter\")
+	get_parent().add_to_group(\"box\")
 
 func _enter(o: Node2D):
 	if o.is_in_group(\"bullet\"):

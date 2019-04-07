@@ -16,9 +16,13 @@ _global_script_class_icons={
 [application]
 
 config/name="Testing Game"
-run/main_scene="res://Levels/DemoLevel.tscn"
+run/main_scene="res://Levels/Level_0.tscn"
 run/low_processor_mode=true
 config/icon="res://icon.png"
+
+[autoload]
+
+g="*res://Global.gd"
 
 [display]
 

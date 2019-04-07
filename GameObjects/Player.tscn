@@ -6,8 +6,13 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D
 
+export var ammo = 10
+export var maxAmmo = 20
+
 func _ready():
 	$g/ani.play(\"stay\")
+	setAmmos(ammo, maxAmmo)
+	add_to_group(\"player\")
 
 func _physics_process(delta):
 	aim(get_global_mouse_position()) # Тимчасово тут
@@ -24,7 +29,12 @@ func aim(pos: Vector2): # Куди прицілюватись ** Example: Vector
 	$g/wpn.look_at(pos)
 
 func change_weapon(weapon: Node2D):
-	$g/wpn.replace_by(weapon)"
+	$g/wpn.replace_by(weapon)
+
+func setAmmos(ammo: int, maxAmmo: int):
+	$g/wpn.ammo = ammo
+	$g/wpn.maxAmmo = maxAmmo
+	$g/wpn.updateLabel()"
 
 [sub_resource type="Animation" id=2]
 length = 3.0
@@ -123,15 +133,15 @@ script = SubResource( 1 )
 [node name="g" type="Node2D" parent="."]
 
 [node name="head" type="Sprite" parent="g"]
-position = Vector2( 2.13394, -1.2995 )
-rotation = 0.020945
+position = Vector2( 7.1128, -4.33146 )
+rotation = 0.0698132
 scale = Vector2( 0.655525, 0.624721 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 149, 268, 423, 464 )
 
 [node name="body" type="Sprite" parent="g"]
-position = Vector2( 5.15305, 224.382 )
+position = Vector2( 5.47894, 219.494 )
 scale = Vector2( 0.655525, 0.624721 )
 texture = ExtResource( 1 )
 region_enabled = true
