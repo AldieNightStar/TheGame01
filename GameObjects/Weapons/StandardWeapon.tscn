@@ -5,7 +5,7 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
-export var maxAmmo = 120
+export var maxAmmo = 30
 var ammo = 10
 var reloadAmmo = 10
 
@@ -36,11 +36,12 @@ func reload():
 
 func _reloadDone():
 	if maxAmmo > 0:
-		if (maxAmmo - reloadAmmo) > 0:
+		if (maxAmmo - reloadAmmo) >= 0:
 			ammo = reloadAmmo
 			maxAmmo -= reloadAmmo
 		else:
 			ammo = maxAmmo
+			maxAmmo = 0
 
 func ani_done(a):
 	if (a == \"reload\"):

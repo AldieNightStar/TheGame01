@@ -3,39 +3,35 @@
 [ext_resource path="res://assets/bullet.png" type="Texture" id=1]
 
 [sub_resource type="GDScript" id=1]
-script/source = "extends KinematicBody2D
+script/source = "extends RigidBody2D
 
 export var vec : Vector2
 
 func _ready():
 	$notifier.connect(\"screen_exited\", self, \"queue_free\")
 	add_to_group(\"bullet\") # Важливо щоб пуля була в группі 'bullet'
-
-func _physics_process(delta):
-	var c = move_and_collide(vec)
-	if c:
-		if c.collider.is_in_group(\"bullet\"):
-			self.add_collision_exception_with(c.collider)
-		if c.collider.is_in_group(\"mirror\"):
-			vec = vec.bounce(c.normal)
-		else:
-			queue_free()"
+	apply_impulse(Vector2(), vec * 500)
+	var t : Timer = Timer.new()
+	add_child(t)
+	t.one_shot = true
+	t.connect(\"timeout\", self, \"queue_free\")
+	t.start(2)"
 
 [sub_resource type="RectangleShape2D" id=2]
 
-[node name="defaultBullet" type="KinematicBody2D"]
-scale = Vector2( 2.54576, 2.65596 )
+[node name="defaultBullet" type="RigidBody2D"]
+mass = 5.0
 script = SubResource( 1 )
 
 [node name="spr" type="Sprite" parent="."]
 position = Vector2( -0.115657, 0 )
-scale = Vector2( 0.00272033, 0.00228419 )
+scale = Vector2( 0.0134833, 0.0124641 )
 texture = ExtResource( 1 )
 
 [node name="shape" type="CollisionShape2D" parent="."]
-position = Vector2( -0.13305, -0.0311453 )
-rotation = 3.14159
-scale = Vector2( 0.0762724, -0.0576747 )
+position = Vector2( -0.230039, -0.176627 )
+rotation = -3.14159
+scale = Vector2( 0.370003, -0.382902 )
 shape = SubResource( 2 )
 
 [node name="notifier" type="VisibilityNotifier2D" parent="."]

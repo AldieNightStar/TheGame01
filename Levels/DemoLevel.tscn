@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://GameObjects/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://GameObjects/Obstacles/MirrorWall.tscn" type="PackedScene" id=2]
+[ext_resource path="res://GameObjects/Obstacles/SimpleBox.tscn" type="PackedScene" id=3]
 
 [node name="Level" type="Node2D"]
 
@@ -12,30 +13,38 @@ scale = Vector2( 0.478256, 0.516905 )
 [node name="lvlObjects" type="Node2D" parent="."]
 
 [node name="mirrorWall6" parent="lvlObjects" instance=ExtResource( 2 )]
-position = Vector2( 773.851, 323.386 )
-scale = Vector2( 1.58579, 5.60111 )
+position = Vector2( 977.191, 271.835 )
+scale = Vector2( 1.58579, 7.24371 )
 
 [node name="mirrorWall12" parent="lvlObjects" instance=ExtResource( 2 )]
 position = Vector2( 643.851, 580.385 )
 scale = Vector2( 12.6753, 2.28446 )
 
+[node name="mirrorWall13" parent="lvlObjects" instance=ExtResource( 2 )]
+position = Vector2( 229.006, 625.618 )
+scale = Vector2( 0.450996, 5.22144 )
+
 [node name="mirrorWall7" parent="lvlObjects" instance=ExtResource( 2 )]
-position = Vector2( 196.718, 146.456 )
+position = Vector2( 161.348, 243.042 )
 scale = Vector2( 4.62548, 0.718549 )
 
-[node name="mirrorWall10" parent="lvlObjects" instance=ExtResource( 2 )]
-position = Vector2( 995.716, 116.456 )
-scale = Vector2( 0.455369, 3.02167 )
-
-[node name="mirrorWall11" parent="lvlObjects" instance=ExtResource( 2 )]
-position = Vector2( 929.716, 237.456 )
-scale = Vector2( 3.08324, 0.675723 )
-
 [node name="mirrorWall9" parent="lvlObjects" instance=ExtResource( 2 )]
-position = Vector2( 31.7178, 88.456 )
+position = Vector2( 24.916, 129.267 )
 scale = Vector2( 0.797116, 2.40358 )
 
 [node name="mirrorWall8" parent="lvlObjects" instance=ExtResource( 2 )]
 position = Vector2( 502.717, 17.4562 )
 scale = Vector2( 15.4632, 0.582249 )
+
+[node name="Box" parent="." instance=ExtResource( 3 )]
+position = Vector2( 836.736, 319.772 )
+mass = 40.0
+
+[node name="Box2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 635.182, 374.21 )
+mass = 40.0
+
+[node name="Box3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 299.055, 121.658 )
+mass = 40.0
 
