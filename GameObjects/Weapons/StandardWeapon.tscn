@@ -12,6 +12,7 @@ var reloadAmmo = 10
 func _ready():
 	$ani.connect(\"animation_finished\", self, \"ani_done\")
 	$ani.play(\"stay\")
+	updateLabel()
 
 func shoot():
 	# Check for bullets
@@ -23,8 +24,12 @@ func shoot():
 		get_tree().get_root().get_node(\"Level\").add_child(bullet) # TODO
 		$ani.play(\"shoot\")
 		ammo -= 1
+		updateLabel()
 	elif maxAmmo > 0:
 		reload()
+
+func updateLabel():
+	$g/Label.text = str(ammo) + \"/\" + str(maxAmmo)
 
 func reload():
 	$ani.play(\"reload\")
@@ -40,6 +45,7 @@ func _reloadDone():
 func ani_done(a):
 	if (a == \"reload\"):
 		_reloadDone()
+		updateLabel()
 	if (a != \"stay\"):
 		$ani.play(\"stay\")
 
@@ -289,6 +295,14 @@ tracks/5/keys = {
 script = SubResource( 1 )
 
 [node name="g" type="Node2D" parent="."]
+
+[node name="Label" type="Label" parent="g"]
+margin_left = -93.5843
+margin_top = -112.579
+margin_right = -53.5843
+margin_bottom = -98.5791
+rect_scale = Vector2( 5.1767, 5.68475 )
+text = "LABEL"
 
 [node name="left_hand" type="Sprite" parent="g"]
 position = Vector2( 10.8546, 68.9228 )
