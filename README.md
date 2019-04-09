@@ -7,4 +7,4 @@ Ihor Fox and Vlad's Game
 or download with <a href="https://github.com/AldieNightStar/TheGame01/archive/master.zip">zip</a>
 
 # Godot
-* Just import game in your project to test || play
+* Just import game in your project list to test || play
