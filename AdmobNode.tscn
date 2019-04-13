@@ -1,0 +1,112 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+# === API ===
+# loadBanner()
+# loadInterstitial()
+# loadRewardedVideo()
+# showBanner()
+# hideBanner()
+# showInterstitial()
+# showRewardedVideo()
+# === === ===
+
+var admob = null
+export var isReal = true
+export var isTop = true
+export var loadAdsOnStart = true
+export var adBannerId = \"ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX\" # [Replace with your Ad Unit ID and delete this message.]
+export var adInterstitialId = \"ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX\" # [Replace with your Ad Unit ID and delete this message.]
+export var adRewardedId = \"ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX\" # [There is no testing option for rewarded videos, so you can use this id for testing]
+
+func _ready():
+	if(Engine.has_singleton(\"AdMob\")):
+		admob = Engine.get_singleton(\"AdMob\")
+		admob.init(isReal, get_instance_id())
+	if loadAdsOnStart:
+		loadBanner()
+		loadInterstitial()
+		loadRewardedVideo()
+	get_tree().connect(\"screen_resized\", self, \"onResize\")
+
+# Loaders
+
+func loadBanner():
+	if admob != null:
+		admob.loadBanner(adBannerId, isTop)
+
+func loadInterstitial():
+	if admob != null:
+		admob.loadInterstitial(adInterstitialId)
+		
+func loadRewardedVideo():
+	if admob != null:
+		admob.loadRewardedVideo(adRewardedId)
+		
+# Standard Functions
+
+func showBanner():
+	if admob != null:
+		admob.showBanner()
+
+func hideBanner():
+	if admob != null:
+		admob.hideBanner()
+
+func showInterstitial():
+	if admob != null:
+		admob.showInterstitial()
+
+func showRewardedVideo():
+	if admob != null:
+		admob.showRewardedVideo()
+
+# Signals and Events
+signal network_error()
+signal ad_loaded()
+signal interstitial_not_loaded()
+signal interstitial_loaded()
+signal interstitial_close()
+signal rewarded_video_ad_loaded()
+signal rewarded_video_ad_closed()
+signal rewarded(currency, amount)
+
+func _on_admob_network_error():
+	emit_signal(\"network_error\")
+
+func _on_admob_ad_loaded():
+	emit_signal(\"ad_loaded\")
+
+func _on_interstitial_not_loaded():
+	emit_signal(\"interstitial_not_loaded\")
+
+func _on_interstitial_loaded():
+	emit_signal(\"interstitial_loaded\")
+
+func _on_interstitial_close():
+	emit_signal(\"interstitial_close\")
+
+func _on_rewarded_video_ad_loaded():
+	emit_signal(\"rewarded_video_ad_loaded\")
+	
+func _on_rewarded_video_ad_closed():
+	emit_signal(\"rewarded_video_ad_closed\")
+	
+func _on_rewarded(currency, amount):
+	emit_signal(\"rewarded\", currency, amount)
+
+# Resize
+
+func onResize():
+	if admob != null:
+		admob.resize()
+"
+
+[node name="AdmobNode" type="Node2D"]
+script = SubResource( 1 )
+__meta__ = {
+"__editor_plugin_screen__": "3D"
+}
+

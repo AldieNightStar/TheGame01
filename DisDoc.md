@@ -10,7 +10,7 @@ Group: `player`
 * aim(position: Vector2) # Looking at position
 * shoot()
 * reload()
-* change_weapon(weapon: Node2D)
+* change_weapon(weaponName) # Change weapon by name
 
 ## Weapons
 * Type: Node2D
@@ -44,5 +44,5 @@ kill() # Killing enemy with cool effect
 g.won() # Means `YOU WIN` and you can go to the next level (For ex. calling won menu)
 
 ## Level changing
-g.changeLeve() # Next level (Loading level with name: `res://Levels/Level_<NUMBER>.tscn`)
+g.nextLevel() # Next level (Loading level with name: `res://Levels/Level_<NUMBER>.tscn`)
 	<NUMBER> - level number to load (0 - is first)

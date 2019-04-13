@@ -1,12 +1,24 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://GameObjects/CheckerTimer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://GameObjects/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://GameObjects/Obstacles/MirrorWall.tscn" type="PackedScene" id=3]
 [ext_resource path="res://GameObjects/Obstacles/SimpleBox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://GameObjects/enemies/SimpleEnemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://AdmobNode.tscn" type="PackedScene" id=6]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+func _ready():
+	$AdmobNode.loadBanner()
+	$AdmobNode.connect(\"ad_loaded\", self, \"xxx\")
+
+func xxx():
+	$AdmobNode.showBanner()"
 
 [node name="Level" type="Node2D"]
+script = SubResource( 1 )
 
 [node name="CheckerTimer" parent="." instance=ExtResource( 1 )]
 
@@ -61,4 +73,7 @@ position = Vector2( 664.797, 158.796 )
 
 [node name="enemy3" parent="lvlObjects" instance=ExtResource( 5 )]
 position = Vector2( 845.225, 118.7 )
+
+[node name="AdmobNode" parent="." instance=ExtResource( 6 )]
+isReal = false
 

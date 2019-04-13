@@ -9,7 +9,7 @@ func remain():
 func won():
 	block = true # Do not touch this string
 	# TODO need to change (BELOW)
-	print("You win")
+	print("You win") # Here is GUI
 	nextLevel()
 
 func check():
