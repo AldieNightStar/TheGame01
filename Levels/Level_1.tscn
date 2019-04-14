@@ -3,8 +3,8 @@
 [ext_resource path="res://GameObjects/CheckerTimer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://GameObjects/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://GameObjects/Obstacles/MirrorWall.tscn" type="PackedScene" id=3]
-[ext_resource path="res://GameObjects/Obstacles/SimpleBox.tscn" type="PackedScene" id=4]
-[ext_resource path="res://GameObjects/enemies/SimpleEnemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://GameObjects/enemies/SimpleEnemy.tscn" type="PackedScene" id=4]
+[ext_resource path="res://GameObjects/Obstacles/SimpleBox.tscn" type="PackedScene" id=5]
 
 [node name="Level" type="Node2D"]
 
@@ -15,6 +15,7 @@ position = Vector2( 113.919, 341.197 )
 scale = Vector2( 0.478256, 0.516905 )
 
 [node name="lvlObjects" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="mirrorWall" parent="lvlObjects" instance=ExtResource( 3 )]
 position = Vector2( 430.62, 240.592 )
@@ -36,9 +37,9 @@ scale = Vector2( 1.38961, 9.30034 )
 position = Vector2( 644.866, 585.312 )
 scale = Vector2( 11.6386, 2.01886 )
 
-[node name="Box" parent="." instance=ExtResource( 4 )]
-position = Vector2( 367.109, 111.654 )
+[node name="enemy" parent="." instance=ExtResource( 4 )]
+position = Vector2( 744.736, 311.574 )
 
-[node name="enemy" parent="Box" instance=ExtResource( 5 )]
-position = Vector2( 377.627, 199.92 )
+[node name="Box" parent="." instance=ExtResource( 5 )]
+position = Vector2( 367.109, 111.654 )
 

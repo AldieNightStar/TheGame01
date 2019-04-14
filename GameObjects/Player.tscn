@@ -13,7 +13,7 @@ func _ready():
 	$g/ani.play(\"stay\")
 	setAmmos(ammo, maxAmmo)
 	add_to_group(\"player\")
-	# change_weapon(\"BlowWeapon\")
+	change_weapon(\"BlowWeapon\")
 
 func _physics_process(delta):
 	aim(get_global_mouse_position()) # Тимчасово тут
